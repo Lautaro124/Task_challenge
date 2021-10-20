@@ -4,3 +4,5 @@ async function main () {
 
     await App(3001)
 }
+
+main()
