@@ -1,0 +1,17 @@
+import express from "express"
+
+const router = express()
+
+router.get('/:id', (req, res) => {
+
+})
+
+router.post('/', (req, res) => {
+
+})
+
+router.put('/:id', (req, res) => {
+
+})
+
+export default router

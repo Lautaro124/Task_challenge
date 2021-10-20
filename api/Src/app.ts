@@ -2,6 +2,8 @@ import express, { Application } from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
+import { TaskModel } from './Modules/modules'
+
 dotenv.config()
 
 
@@ -15,8 +17,7 @@ export default function App(port: String | Number){
     
     const app: Application = express()
     
-    conect().catch( err => console.log(err))
-
+    conect().then(()=> console.log('Data base conected')).catch( err => console.log(err))
 
     app.set('port', port || 3001)
     app.listen( app.get('port'), () => console.log('listening on port', port))
