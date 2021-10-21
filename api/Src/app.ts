@@ -1,8 +1,10 @@
 import express, { Application } from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
+import UserRoute from './Routes/user/routes'
+import TaskRoute from './Routes/task/routes'
 
-import { TaskModel } from './Modules/modules'
 
 dotenv.config()
 
@@ -18,7 +20,12 @@ export default function App(port: String | Number){
     const app: Application = express()
     
     conect().then(()=> console.log('Data base conected')).catch( err => console.log(err))
-
+    
     app.set('port', port || 3001)
+    
+    app.use('/User', UserRoute)
+    app.use('/Task', TaskRoute)
+    app.use(morgan('dev'))
+
     app.listen( app.get('port'), () => console.log('listening on port', port))
 }

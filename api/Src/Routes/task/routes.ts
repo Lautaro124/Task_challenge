@@ -1,16 +1,42 @@
-import express from "express"
+import express, { Request, Response } from "express"
+import { getTask, postTask, putTask } from '../functions'
 
 const router = express()
 
-router.get('/all', (req, res) => {
+router.use(express.json());
 
+router.get('/', async (req: Request, res: Response, next: any) => {
+
+    try{
+        let task = await getTask()
+
+        res.json(task)
+    }
+    catch(err){
+        
+        next(err)
+    }
 })
 
-router.post('/', (req, res) => {
 
+router.post('/', async (req: Request, res: Response, next: any) => {
+    
+    const { name, img, status, reference } = req.body
+
+    try{
+
+        let task = await postTask(name, img, status, reference)
+
+        res.json(task)
+    }
+    catch(err){
+
+        next(err)
+    }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req: Request, res: Response, next: any) => {
+
 
 })
 export default router

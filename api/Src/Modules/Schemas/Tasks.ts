@@ -28,7 +28,7 @@ const task = new Schema<Task> ({
         }
     } },
     status: { type: String, required: true, default: false },
-    reference: { type: Schema.Types.ObjectId, required: true }
+    reference: { type: Schema.Types.ObjectId, required: false }
 })
 
 export default task

@@ -1,9 +1,4 @@
 import App from './app'
-import express from 'express'
-
-import UserRoute from './Routes/user/routes'
-import TaskRoute from './Routes/task/routes'
-
 
 async function main () {
     
@@ -11,7 +6,3 @@ async function main () {
 }
 
 main()
-const router = express.Router()
-
-router.use('/user',UserRoute)
-router.use('/task',TaskRoute)
