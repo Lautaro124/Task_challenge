@@ -1,17 +1,36 @@
-import express from "express"
-import { UserModel } from '../../Modules/modules'
+import express, {Request, Response} from "express"
+import { getUser, postUser } from '../functions'
 
 const router = express()
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req: Request, res: Response, next: any) => {
 
+    try{ 
+        let user = await getUser(req.params.id)
+
+        res.json(user)
+    }
+    catch(err){
+
+        next(err)
+    }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req: Request, res: Response, next: any) => {
 
+    const {firstName, lastName, email, img, password}= req.body
+
+    try{ 
+        let user = await postUser(firstName, lastName, email, img, password)
+
+        res.json(user)
+    }
+    catch(err){
+        next(err)
+    }
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req: Request, res: Response, next: any) => {
 
 })
 
