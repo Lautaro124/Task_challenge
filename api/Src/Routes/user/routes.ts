@@ -1,5 +1,5 @@
 import express, {Request, Response} from "express"
-import { getUser, postUser } from '../functions'
+import { getUser, postUser, putUser } from '../functions'
 
 const router = express()
 
@@ -32,6 +32,19 @@ router.post('/', async (req: Request, res: Response, next: any) => {
 
 router.put('/:id', async (req: Request, res: Response, next: any) => {
 
+    const { firstName, lastName, email, img, password } = req.body
+
+    const idUser = req.params.id
+
+    try{
+
+        let user = await putUser(idUser, firstName, lastName, email, img, password)
+
+        res.json(user)
+    }
+    catch(err){
+        next(err)
+    }
 })
 
 export default router

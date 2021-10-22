@@ -74,3 +74,22 @@ export const postUser = async (firstName: string, lastName: string ,email: strin
         return 'Parametros incorrectos'
     }
 }
+
+export const putUser = async (idUser: string, firstName: string, lastName: string, email: string, img: string, password: string) => {
+
+    let urlValidate: Boolean = validationUrl(img)
+    let emailValidate= validationEmail(email)
+
+    if(urlValidate && emailValidate){
+        
+        let hash = await argon2.hash(password);
+
+        await TaskModel.findByIdAndUpdate(idUser, {firstName, lastName, email, img, password: hash})
+        
+        return {firstName, lastName, email, img, password: hash}
+    }
+    else{ 
+
+        return 'Parametros incorrectos'
+    }
+}

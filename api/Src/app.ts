@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import morgan from 'morgan'
 import UserRoute from './Routes/user/routes'
 import TaskRoute from './Routes/task/routes'
-
+import bodyParser from "body-parser"
 
 dotenv.config()
 
@@ -23,6 +23,9 @@ export default function App(port: String | Number){
     
     app.set('port', port || 3001)
     
+
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
     app.use('/User', UserRoute)
     app.use('/Task', TaskRoute)
     app.use(morgan('dev'))
