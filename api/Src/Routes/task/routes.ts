@@ -5,12 +5,14 @@ const router = express()
 
 router.use(express.json());
 
-router.get('/', async (req: Request, res: Response, next: any) => {
+router.get('/pending', async (req: Request, res: Response, next: any) => {
 
     try{
         let task = await getTask()
 
-        res.json(task)
+        let arrFilter = task.filter( e => e.status === false)
+
+        res.json(arrFilter)
     }
     catch(err){
         
@@ -18,6 +20,20 @@ router.get('/', async (req: Request, res: Response, next: any) => {
     }
 })
 
+router.get('/completed', async (req: Request, res: Response, next: any) => {
+
+    try{
+        let task = await getTask()
+
+        let arrFilter = task.filter( e => e.status === true)
+
+        res.json(arrFilter)
+    }
+    catch(err){
+        
+        next(err)
+    }
+})
 
 router.post('/', async (req: Request, res: Response, next: any) => {
     

@@ -6,19 +6,19 @@ import Button from '@mui/material/Button'
 
 export default function Nav() {
     return (      
-        <AppBar style={{backgroundColor: 'rgb(138, 3, 138)'}} position="static" >
+        <AppBar style={{backgroundColor: 'rgb(138, 3, 138)'}} position='static' >
             <Toolbar sx={{
                 display: 'grid',
                 gridAutoColumns: '1fr',
                 gap: 1,
             }}>
-                <Typography variant="h6" sx={{gridRow: '1', gridColumn: '1'}}>
+                <Typography variant='h6' sx={{gridRow: '1', gridColumn: '1'}}>
                     List
                 </Typography>
-                <Button color="inherit" variant="outlined" sx={{ gridRow: '1', gridColumn: '7' }}>
+                <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '7' }}>
                     Register
                 </Button>
-                <Button color="inherit" variant="outlined" sx={{ gridRow: '1', gridColumn: '8' }}>
+                <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '8' }}>
                     Login
                 </Button>
             </Toolbar>

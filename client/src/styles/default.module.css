@@ -28,11 +28,17 @@
 }
 
 .taskComplete{
-
+    border-radius: .25rem;
+    padding: 1%;
     background-color: var(---ColorDiv);
 }
 
 .taskIncomplete{
-
+    border-radius: .25rem;
+    padding: 1%;
     background-color: var(---ColorDiv);
+}
+
+.text{
+    color: white;
 }

@@ -1,13 +1,20 @@
-import express, { Application } from 'express'
+import express, { Application, Request, Response } from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import morgan from 'morgan'
 import UserRoute from './Routes/user/routes'
 import TaskRoute from './Routes/task/routes'
 import bodyParser from "body-parser"
+import cookieparser from 'cookie-parser'
 
 dotenv.config()
 
+const cors = (req: Request, res: Response, next: any) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+}
 
 const conect = async (): Promise<void>  => {
     const url: string | undefined = process.env.URL
@@ -26,9 +33,12 @@ export default function App(port: String | Number){
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
+    app.use(morgan('dev'))
+    app.use(cookieparser())
+    app.use(cors)
+
     app.use('/User', UserRoute)
     app.use('/Task', TaskRoute)
-    app.use(morgan('dev'))
 
     app.listen( app.get('port'), () => console.log('listening on port', port))
 }

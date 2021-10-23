@@ -1,12 +1,12 @@
 import { TaskModel, UserModel } from '../Modules/modules'
-import { validationEmail, validationUser, validationUrl } from './validates'
+import { validationEmail, validationUrl, validatePassword } from './validates'
 import argon2 from 'argon2'
 
 export const getTask = async () => {
   
-    let model = await TaskModel.find().lean()
+    let model = await TaskModel.find()
+        .lean()
     
-
     return model
 }
 
@@ -50,11 +50,17 @@ export const putTask = async (idTask: string, name: string, img: string, status:
     }
 }
 
-export const getUser = async (id: string)=> {
+export const getUser = async (email: string, password: string)=> {
 
-    let user = UserModel.findOne({_id: id}).lean()
+    let user = await UserModel.findOne({ email }).lean()
 
-    return user
+    let validate = await validatePassword(password, user);
+
+    if(validate) {
+
+        return {...user, password: password }
+    }
+    return 'usuario no encontrado'
 }
 
 export const postUser = async (firstName: string, lastName: string ,email: string, img: string, password: string) => {

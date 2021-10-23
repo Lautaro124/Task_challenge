@@ -1,7 +1,9 @@
-import {  GET_TASK, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'../action/constrain'
+import {  GET_TASK_PENDING, GET_TASK_COMPLETED, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'../action/constrain'
 
 const initialState = {
-    Tasks: [],
+    Task: [],
+    Task_complete: [],
+    Task_pending: [],
     User: {},
 }
 
@@ -9,10 +11,16 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
 
-        case GET_TASK:
+        case GET_TASK_COMPLETED: 
+            return{
+                ...state,
+                Task_complete: action.payload
+            }
+
+        case GET_TASK_PENDING:
             return {
                 ...state,
-                Tasks: action.payload
+                Task_pending: action.payload
             }
 
         case POST_TASK:
@@ -22,17 +30,36 @@ export default function reducer(state = initialState, action) {
             }
             
         case PUT_TASK:
-            return {
-                ...state,
-                Taks: state.Taks.map(e => {
 
-                    if(e.id === action.payload.id) {
+            if(action.payload.status === true){
 
-                        return action.payload
-                    }else {
-                        return e
-                    }
-                })
+                
+                return {
+                    ...state,
+                    Taks: state.Task_complete.map(e => {
+    
+                        if(e.name === action.payload.name) {
+    
+                            return action.payload
+                        }else {
+                            return e
+                        }
+                    })
+                }
+            }else{
+
+                return {
+                    ...state,
+                    Taks: state.Task_pending.map(e => {
+    
+                        if(e.name === action.payload.name) {
+    
+                            return action.payload
+                        }else {
+                            return e
+                        }
+                    })
+                }
             }
         
         case GET_USER: 

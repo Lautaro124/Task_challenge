@@ -1,3 +1,4 @@
+import argon2 from 'argon2'
 
 export const validationEmail = (email: string) => {
 
@@ -11,9 +12,12 @@ export const validationEmail = (email: string) => {
     return true
 }
 
-export const validationUser = (user: string) => {
-    
+export const validatePassword = async (password: string, hash: any): Promise<boolean> => {
 
+    if(await argon2.verify(hash.password, password)){
+        return true
+    }
+    return false
 }
 
 export const validationUrl = (url: string) => {

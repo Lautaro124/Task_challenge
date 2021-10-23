@@ -1,12 +1,63 @@
-import { URL,GET_TASK, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'./constrain'
+import { URL,GET_TASK_PENDING, GET_TASK_COMPLETED, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'./constrain'
 import axios from 'axios'
 
-export const getTask = async () => {
+export const getTaskCompleted = () => {
 
-    const task = await axios.get(`${URL}Task`)
+    return async function (dispatch){
 
-    return {
-        type: GET_TASK,
-        payload: task.data
+        try{
+
+            const task = await axios.get(`${URL}/Task/completed`)
+    
+            return dispatch ({
+                type: GET_TASK_COMPLETED,
+                payload: task.data
+            })
+        }
+        catch (err) {
+
+            console.log(err)
+        }
+    }
+}
+
+export const getTaskPending = () => {
+
+    return async function (dispatch){
+
+        try{
+
+            const task = await axios.get(`${URL}/Task/pending`)
+    
+            return dispatch ({
+                type: GET_TASK_PENDING,
+                payload: task.data
+            })
+        }
+        catch (err) {
+
+            console.log(err)
+        }
+    }
+}
+
+export const putTask = (idTask, change) => {
+
+    return async function (dispatch) {
+
+        try{
+
+            const task = await axios.put(`${URL}/Task/${idTask}`, {...change})
+
+            return dispatch({
+                type: PUT_TASK,
+                payload: task.data,
+            })
+
+        }
+        catch(err){
+
+            console.log(err)
+        }
     }
 }

@@ -3,10 +3,11 @@ import { getUser, postUser, putUser } from '../functions'
 
 const router = express()
 
-router.get('/:id', async (req: Request, res: Response, next: any) => {
+router.get('/', async (req: Request, res: Response, next: any) => {
 
+    const { email, password } = req.body
     try{ 
-        let user = await getUser(req.params.id)
+        let user = await getUser(email, password)
 
         res.json(user)
     }
