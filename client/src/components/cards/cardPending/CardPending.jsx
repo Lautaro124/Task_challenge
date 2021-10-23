@@ -22,8 +22,13 @@ export default function CardPending() {
                     </Typography>
                     <Typography>
                         Reference: alguien    
-                    </Typography> 
+                    </Typography>
                 </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        Description: asjkndoisdnfiosd
+                    </Typography>
+                </AccordionDetails>
             </Accordion>
         </div>
     )

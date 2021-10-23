@@ -4,5 +4,6 @@
 }
 
 :root{
-  ---ColorBackground: rgb(31, 31, 31) ;
+  ---ColorBackground: rgb(61, 61, 61);
+  ---ColorDiv: rgb(31, 31, 31);
 }

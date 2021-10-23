@@ -4,3 +4,35 @@
     background-color: var(---ColorBackground);
     margin: none;
 }
+
+@media (min-width: 767px) and (max-width: 3000px) {
+    
+    .gird{
+        margin-top: 2%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 2%;
+    }
+    
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    .gird{
+        margin-top: 2%;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 2%;
+    }
+}
+
+.taskComplete{
+
+    background-color: var(---ColorDiv);
+}
+
+.taskIncomplete{
+
+    background-color: var(---ColorDiv);
+}
