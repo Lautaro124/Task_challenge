@@ -1,10 +1,11 @@
-import {  GET_TASK_PENDING, GET_TASK_COMPLETED, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'../action/constrain'
+import {  GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'../action/constrain'
 
 const initialState = {
     Task: [],
     Task_complete: [],
     Task_pending: [],
     User: {},
+    Users: []
 }
 
 export default function reducer(state = initialState, action) {
@@ -21,6 +22,19 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 Task_pending: action.payload
+            }
+
+        case GET_USER_ID:
+
+            if(!state.Users.includes( e => e._id === action.payload._id)){
+
+                return {
+                    ...state,
+                    Users: [...state.Users, action.payload]
+                }
+            }
+            else{
+                return ;
             }
 
         case POST_TASK:

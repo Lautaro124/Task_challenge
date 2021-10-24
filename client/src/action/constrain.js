@@ -3,6 +3,7 @@ module.exports = {
     URL:'http://localhost:3001',
     GET_TASK_PENDING: 'GET_TASK_PENDING',
     GET_TASK_COMPLETED: 'GET_TASK_COMPLETED',
+    GET_USER_ID: 'GET_USER_ID',
     POST_TASK : 'POST_TASK',
     PUT_TASK : 'PUT_TASK',
     GET_USER: 'GET_USER',

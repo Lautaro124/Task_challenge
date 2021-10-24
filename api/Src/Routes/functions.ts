@@ -4,8 +4,7 @@ import argon2 from 'argon2'
 
 export const getTask = async () => {
   
-    let model = await TaskModel.find()
-        .lean()
+    let model = await TaskModel.find().lean()
     
     return model
 }
@@ -61,6 +60,13 @@ export const getUser = async (email: string, password: string)=> {
         return {...user, password: password }
     }
     return 'usuario no encontrado'
+}
+
+export const getUserId = async (id: any) => {
+
+    let user = await UserModel.findOne({_id: id}).lean()
+
+    return user
 }
 
 export const postUser = async (firstName: string, lastName: string ,email: string, img: string, password: string) => {

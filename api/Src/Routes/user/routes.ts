@@ -1,5 +1,5 @@
 import express, {Request, Response} from "express"
-import { getUser, postUser, putUser } from '../functions'
+import { getUser, postUser, putUser, getUserId } from '../functions'
 
 const router = express()
 
@@ -13,6 +13,21 @@ router.get('/', async (req: Request, res: Response, next: any) => {
     }
     catch(err){
 
+        next(err)
+    }
+})
+
+router.get('/:id', async (req: Request, res: Response, next: any) => {
+
+    const id = req.params.id
+
+    try{
+
+        let user = await getUserId(id)
+
+        res.json(user)
+    }
+    catch(err){
         next(err)
     }
 })

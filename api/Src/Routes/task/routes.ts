@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express"
-import { getTask, postTask, putTask } from '../functions'
+import { getTask, postTask, putTask, getUserId } from '../functions'
 
 const router = express()
 

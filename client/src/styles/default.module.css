@@ -40,5 +40,41 @@
 }
 
 .text{
+    color: white !important;
+}
+
+.link{
+    text-decoration: none;
+    color: white !important;
+}
+
+#navLink{
+    width: 100%;
+}
+
+.form{
+    width: 60%;
+    min-height: 50%;
+    margin-top: 2% !important;
+    margin: auto;
+    background-color: var(---ColorDiv);
+    padding: 2%;
+}
+
+.div{
+    display: flex;
+    width: 100%;
+    margin-top: 1%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: space-around;
+}
+
+.input{
+    width: 100%;
     color: white;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }

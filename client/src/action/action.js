@@ -1,4 +1,4 @@
-import { URL,GET_TASK_PENDING, GET_TASK_COMPLETED, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'./constrain'
+import { URL,GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'./constrain'
 import axios from 'axios'
 
 export const getTaskCompleted = () => {
@@ -57,6 +57,25 @@ export const putTask = (idTask, change) => {
         }
         catch(err){
 
+            console.log(err)
+        }
+    }
+}
+
+export const getUserId = (id) => {
+
+    return async function (dispatch){
+
+        try{
+
+            const user = await axios.get(`${URL}/User/${id}`)
+    
+            return dispatch ({
+                type: GET_USER_ID,
+                payload: user.data
+            })
+        }
+        catch(err){
             console.log(err)
         }
     }

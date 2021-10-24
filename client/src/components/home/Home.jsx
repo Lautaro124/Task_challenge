@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTaskCompleted, getTaskPending } from '../../action/action'
+import { Link } from 'react-router-dom'
 import styleDefault from '../../styles/default.module.css'
-import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
+import { Container, Button, Typography} from '@mui/material'
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined'
 import Card from '../cards/Card'
-import Typography from '@mui/material/Typography'
 
 export default function Home() {
 
@@ -25,8 +24,8 @@ export default function Home() {
         <div className={styleDefault.content}>
             <Container maxWidth='1sm'>
                 <div className={styleDefault.gird}>
-
                     <div className={styleDefault.taskIncomplete}>
+
                         <Typography variant='h4' sx={{ margin: 2, color: 'white' }} >
                             Task Pending
                         </Typography>
@@ -38,21 +37,26 @@ export default function Home() {
                                     key={index}
                                     _id={e._id}
                                     name={e.name} 
-                                    reference={e.reference} 
+                                    reference={e.reference? e.reference: null} 
                                     status={e.status}
                                     img={e.img} 
                                 />
                             ))
                         }
-                        <Button 
-                            variant='contained' 
-                            style={{ backgroundColor: 'rgb(138, 3, 138)',color: 'white', margin: '2%', width: '80%'}}
-                        >
-                            <AddOutlinedIcon fontSize='small'/> Add task
-                        </Button>
+                        <Link to='/addCard' className={styleDefault.link}>
+                        
+                            <Button 
+                                variant='contained' 
+                                style={{ backgroundColor: 'rgb(138, 3, 138)',color: 'white', margin: '2%', width: '80%'}}
+                            >
+                                <AddOutlinedIcon fontSize='small'/> Add task
+                            </Button>
+                        </Link>
+
                     </div>
 
                     <div className={styleDefault.taskComplete}>
+
                         <Typography variant='h4' sx={{ margin: 2, color: 'white' }} >
                             Task Completed
                         </Typography>
@@ -70,6 +74,7 @@ export default function Home() {
                                 />
                             ))
                         }
+
                     </div>
                 </div>
             </Container>

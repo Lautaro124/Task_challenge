@@ -1,8 +1,7 @@
 import React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
+import { AppBar, Toolbar, Typography, Button } from '@mui/material'
+import { Link } from 'react-router-dom'
+import style from '../../styles/default.module.css'
 
 export default function Nav() {
     return (      
@@ -12,14 +11,20 @@ export default function Nav() {
                 gridAutoColumns: '1fr',
                 gap: 1,
             }}>
-                <Typography variant='h6' sx={{gridRow: '1', gridColumn: '1'}}>
-                    List
-                </Typography>
+                <Link to='/' className={style.link}>
+                    <Typography variant='h6' sx={{gridRow: '1', gridColumn: '1'}}>
+                        List to do
+                    </Typography>
+                </Link>
                 <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '7' }}>
-                    Register
+                    <Link to='/register' id={style.navLink} className={style.link}>
+                        Register
+                    </Link>
                 </Button>
                 <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '8' }}>
-                    Login
+                    <Link to='/login' id={style.navLink} className={style.link}>
+                        Login
+                    </Link>
                 </Button>
             </Toolbar>
         </AppBar>   
