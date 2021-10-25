@@ -22,12 +22,17 @@ export const validatePassword = async (password: string, hash: any): Promise<boo
 
 export const validationUrl = (url: string) => {
 
+    let parse = JSON.parse(url)
     let re = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    let validate = true
 
-    if(!re.test(url)){
-        
-        return false
-    }
+    parse.forEach((e: string)=> {
 
-    return true
+        if(!re.test(parse)){
+            
+            validate = false
+        }
+    })
+
+    return validate
 }

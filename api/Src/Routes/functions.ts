@@ -9,16 +9,25 @@ export const getTask = async () => {
     return model
 }
 
-export const postTask = async (name: string, img: string, status: Boolean, description: string) => {
+export const postTask = async (name: string, img: string | undefined, status: Boolean, description: string) => {
 
-    let urlValidate: Boolean = validationUrl(img)
+    if(img){
 
-    if(urlValidate){
-
-        await TaskModel.create({name, img, status, description})
+        let urlValidate: Boolean = validationUrl(img)
     
-        return {name, img, status, description}
+        if(urlValidate){
+    
+            await TaskModel.create({name, img, status, description})
         
+            return {name, img, status, description}
+            
+        }
+    }
+    else{ 
+
+        await TaskModel.create({name, status, description})
+        
+        return {name, status, description}
     }
 }
 

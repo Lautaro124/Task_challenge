@@ -2,7 +2,7 @@ import { Schema } from 'mongoose'
 
 interface Task {
     name: string;
-    img: string;
+    img?: string;
     description: string;
     status: boolean | string;
 }
@@ -18,7 +18,7 @@ const task = new Schema<Task> ({
             return true;
         }
     }},
-    img: { type: String, validate: {
+    img: { type: String, required: false,validate: {
         validator: function (value: any) {
             const re = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
             if (!re.test(value)) {

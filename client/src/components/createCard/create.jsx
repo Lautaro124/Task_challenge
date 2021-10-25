@@ -9,26 +9,28 @@ import axios from 'axios'
 export default function Create() {
 
     const dispatch = useDispatch()
-    const [ imag, setImag ] = useState('')
+    const [ urls, setUrl ] = useState([])
     const [ name, setName ] = useState('')
     const [ description, setDescription ] = useState('')
 
-    const uploadImage = async () => {
+    const uploadImage = async (e) => {
+        
         const data = new FormData()
-        data.append('file',imag)
+        data.append('file',e)
         data.append('upload_preset','ImagesAdd')
 
         const text = await axios.post('https://api.cloudinary.com/v1_1/dwvnbejfd/image/upload', data)
         
-        return text.data
+        setUrl([...urls, text.data.url])
     }
 
 
     const onSubmit = async(e) => {
         e.preventDefault()
-        const url = await uploadImage()
 
-        dispatch(postTask(name, url.url, description))
+        const strinImg = JSON.stringify(urls)
+
+        dispatch(postTask(name, strinImg, description))
     }
 
     return (
@@ -60,7 +62,7 @@ export default function Create() {
                         variant='filled' 
                     />
 
-                    <input type='file' className={style.input} onChange={ e => setImag(e.target.files[0])}/>
+                    <input type='file' className={style.input} onChange={ e => uploadImage(e.target.files[0])}/>
                     {
                         name !== '' && description !== ''?
                         

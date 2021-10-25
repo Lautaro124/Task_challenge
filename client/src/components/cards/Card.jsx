@@ -5,11 +5,14 @@ import style from '../../styles/default.module.css'
 import { putTask,  getTaskCompleted, getTaskPending, taskEdit } from '../../action/action'
 import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 
 export default function CardPending({_id, name, status, description, img}) {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.User)
+    const arrImg = JSON.parse(img)
 
     const handleChange = async (e) => {
 
@@ -51,8 +54,18 @@ export default function CardPending({_id, name, status, description, img}) {
 
             <AccordionDetails>
                 <div className={style.display}>
-                     
-                    <img className={style.img} src={img}/>
+                    <div className={style.imgConten}>
+
+                       <AwesomeSlider>
+                            {    
+                                arrImg?.map((e, index) => (
+                                    
+                                    <div key={index} data-src={e} className={style.img}></div>
+                                ))
+                            }
+
+                        </AwesomeSlider> 
+                    </div>
                     
                     
                     <Typography variant='span' sx={{color: 'white' }}>
