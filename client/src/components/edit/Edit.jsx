@@ -10,7 +10,6 @@ export default function Edit() {
 
     const dispatch = useDispatch()
     const task = useSelector(state => state.Task)
-
     const [ img, setImg] = useState(task.img)
     const [ newName, setNewName ] = useState(task.name)
     const [ descrition, setDescription ] = useState(task.description)
@@ -32,11 +31,11 @@ export default function Edit() {
 
             const newImg = await upload()
 
-            dispatch(putTask(task._id,{name: newName, img: newImg, status: false, descrition}))
+            dispatch(putTask(task._id,{name: newName, img: newImg, status: false, description: descrition}))
         }
         else{
             
-            dispatch(putTask(task._id,{name: newName, img , status: false, descrition}))
+            dispatch(putTask(task._id,{name: newName, img , status: false, description: descrition}))
         }
     }
 

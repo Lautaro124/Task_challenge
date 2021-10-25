@@ -53,14 +53,13 @@ export default function reducer(state = initialState, action) {
 
             if(action.payload.status === true){
 
-                
                 return {
                     ...state,
                     Task_complete: state.Task_complete.map(e => {
     
                         if(e.name === action.payload.name) {
     
-                            return action.payload
+                            return {...action.payload}
                         }else {
                             return e
                         }
@@ -74,7 +73,7 @@ export default function reducer(state = initialState, action) {
     
                         if(e.name === action.payload.name) {
     
-                            return action.payload
+                            return {...action.payload}
                         }else {
                             return e
                         }

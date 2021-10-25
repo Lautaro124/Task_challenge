@@ -13,7 +13,8 @@ export default function CardPending({_id, name, status, description, img}) {
 
     const handleChange = async (e) => {
 
-        await dispatch(putTask(_id, {name, status: e.target.checked, description}))
+        e.preventDefault()
+        await dispatch(putTask(_id, {name, status: true, description, img}))
         dispatch(getTaskCompleted())
         dispatch(getTaskPending())
     }
@@ -42,7 +43,7 @@ export default function CardPending({_id, name, status, description, img}) {
                         <Checkbox disabled/>:
                         <Checkbox disabled checked/>
                     }
-                    <Typography variant='h6' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
+                    <Typography variant='h6' sx={{ width: '50%', flexShrink: 0, color: 'white' }}>
                         {name}
                     </Typography>
                 </Box>
@@ -65,7 +66,12 @@ export default function CardPending({_id, name, status, description, img}) {
                                 onClick={(e) => {
                                     send(e)
                                 }}
-                                sx={{ height: '100%', width: '100%' }} 
+                                sx={{ 
+                                    height: '100%', 
+                                    width: '100%',
+                                    gridRow: '2', 
+                                    gridColumn: '1/3'
+                                }} 
                                 color='secondary' 
                                 variant='contained'
                             >
