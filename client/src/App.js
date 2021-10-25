@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getUser, getTaskPending, getTaskCompleted, getUserAll } from './action/action'
 import { Route, BrowserRouter } from 'react-router-dom'
 import Home from './components/home/Home'
 import Nav from './components/nav/Nav'
@@ -8,6 +11,22 @@ import './App.css'
 
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+    dispatch(getTaskCompleted())
+    dispatch(getTaskPending())
+    dispatch(getUserAll())
+
+    if(localStorage.user){
+
+      let user = JSON.parse(localStorage.user)
+
+      dispatch(getUser(user.email, user.password))
+    }
+
+  },[dispatch])
 
   return (
     <BrowserRouter>

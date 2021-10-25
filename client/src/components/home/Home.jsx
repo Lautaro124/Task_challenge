@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getTaskCompleted, getTaskPending } from '../../action/action'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styleDefault from '../../styles/default.module.css'
 import { Container, Button, Typography} from '@mui/material'
@@ -9,16 +8,8 @@ import Card from '../cards/Card'
 
 export default function Home() {
 
-    const dispatch = useDispatch()
     const task_complete = useSelector(state => state.Task_complete)
     const task_pending = useSelector(state => state.Task_pending)
-
-    useEffect(()=>{
-
-        dispatch(getTaskPending())
-        dispatch(getTaskCompleted())
-
-    },[dispatch])
 
     return (
         <div className={styleDefault.content}>

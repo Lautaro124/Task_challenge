@@ -1,4 +1,4 @@
-import {  GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, PUT_USER } from'../action/constrain'
+import {  GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, LOG_OUT } from'../action/constrain'
 
 const initialState = {
     Task: [],
@@ -26,16 +26,11 @@ export default function reducer(state = initialState, action) {
 
         case GET_USER_ID:
 
-            if(!state.Users.includes( e => e._id === action.payload._id)){
-
-                return {
-                    ...state,
-                    Users: [...state.Users, action.payload]
-                }
+            return {
+                ...state,
+                Users: action.payload
             }
-            else{
-                return ;
-            }
+            
 
         case POST_TASK:
             return {
@@ -77,6 +72,7 @@ export default function reducer(state = initialState, action) {
             }
         
         case GET_USER: 
+            localStorage.user = JSON.stringify(action.payload)
             return {
                 ...state,
                 User: action.payload
@@ -84,15 +80,17 @@ export default function reducer(state = initialState, action) {
         
 
         case POST_USER:
+            localStorage.user = JSON.stringify(action.payload)
             return {
                 ...state,
                 User: action.payload
             }
         
-        case PUT_USER: 
+        case LOG_OUT: 
+            localStorage.clear()
             return {
                 ...state,
-                User: action.payload
+                User: {}
             }
             
         default:

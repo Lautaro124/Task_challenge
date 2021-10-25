@@ -3,10 +3,11 @@ import { getUser, postUser, putUser, getUserId } from '../functions'
 
 const router = express()
 
-router.get('/', async (req: Request, res: Response, next: any) => {
+router.get('/:email/:password', async (req: Request, res: Response, next: any) => {
 
-    const { email, password } = req.body
+    const { email, password } = req.params
     try{ 
+        console.log( { email, password})
         let user = await getUser(email, password)
 
         res.json(user)
@@ -17,13 +18,11 @@ router.get('/', async (req: Request, res: Response, next: any) => {
     }
 })
 
-router.get('/:id', async (req: Request, res: Response, next: any) => {
-
-    const id = req.params.id
+router.get('/', async (req: Request, res: Response, next: any) => {
 
     try{
 
-        let user = await getUserId(id)
+        let user = await getUserId()
 
         res.json(user)
     }
@@ -34,10 +33,10 @@ router.get('/:id', async (req: Request, res: Response, next: any) => {
 
 router.post('/', async (req: Request, res: Response, next: any) => {
 
-    const {firstName, lastName, email, img, password}= req.body
+    const {firstName, lastName, email, password}= req.body
 
     try{ 
-        let user = await postUser(firstName, lastName, email, img, password)
+        let user = await postUser(firstName, lastName, email, password)
 
         res.json(user)
     }
@@ -48,13 +47,13 @@ router.post('/', async (req: Request, res: Response, next: any) => {
 
 router.put('/:id', async (req: Request, res: Response, next: any) => {
 
-    const { firstName, lastName, email, img, password } = req.body
+    const { firstName, lastName, email, password } = req.body
 
     const idUser = req.params.id
 
     try{
 
-        let user = await putUser(idUser, firstName, lastName, email, img, password)
+        let user = await putUser(idUser, firstName, lastName, email, password)
 
         res.json(user)
     }

@@ -62,43 +62,39 @@ export const getUser = async (email: string, password: string)=> {
     return 'usuario no encontrado'
 }
 
-export const getUserId = async (id: any) => {
+export const getUserId = async () => {
 
-    let user = await UserModel.findOne({_id: id}).lean()
+    let user = await UserModel.find().lean()
 
     return user
 }
 
-export const postUser = async (firstName: string, lastName: string ,email: string, img: string, password: string) => {
+export const postUser = async (firstName: string, lastName: string ,email: string, password: string) => {
 
     let emailValidate= validationEmail(email)
-    let imgValidate = validationUrl(img)
 
-    if(emailValidate && imgValidate){
+    if(emailValidate){
 
+        console.log('aqui')
         let hash = await argon2.hash(password);
 
-        await UserModel.create({firstName, lastName, email, img, password: hash})
+        await UserModel.create({firstName, lastName, email, password: hash})
 
-        return {firstName, lastName, email, img, password: hash}
-    }
-    else{
-        return 'Parametros incorrectos'
+        return {firstName, lastName, email, password: hash}
     }
 }
 
-export const putUser = async (idUser: string, firstName: string, lastName: string, email: string, img: string, password: string) => {
+export const putUser = async (idUser: string, firstName: string, lastName: string, email: string, password: string) => {
 
-    let urlValidate: Boolean = validationUrl(img)
     let emailValidate= validationEmail(email)
 
-    if(urlValidate && emailValidate){
+    if(emailValidate){
         
         let hash = await argon2.hash(password);
 
-        await TaskModel.findByIdAndUpdate(idUser, {firstName, lastName, email, img, password: hash})
+        await TaskModel.findByIdAndUpdate(idUser, {firstName, lastName, email, password: hash})
         
-        return {firstName, lastName, email, img, password: hash}
+        return {firstName, lastName, email, password: hash}
     }
     else{ 
 

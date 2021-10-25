@@ -8,5 +8,5 @@ module.exports = {
     PUT_TASK : 'PUT_TASK',
     GET_USER: 'GET_USER',
     POST_USER: 'POST_USER',
-    PUT_USER: 'PUT_USER',
+    LOG_OUT: 'LOG_OUT',
 }
