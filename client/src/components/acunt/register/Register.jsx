@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import style from '../../../styles/default.module.css'
+import swal from 'sweetalert'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { postUser } from '../../../action/action'
@@ -19,11 +20,21 @@ export default function Register() {
         const reEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
         
         if(!reEmail.test(email)) {
-            return alert('Email erroneo')
+            return swal({ 
+                title: 'Email incorrecto',
+                text: 'Es muy probable que tu email este mal',
+                icon: 'error',
+                button: 'Aceptar'
+            })
         }
         
         if(users.find(e => e.firstName === firstName)){
-            return alert('Su nombre ya se encuentra en registrado')
+            return swal({ 
+                title: 'Usuario ya registrado',
+                text: 'El usuario fue registrado anteriormente, puede utilizar otro nombre o poner una mayuscula ;D',
+                icon: 'error',
+                button: 'Aceptar'
+            })
         }
         
         dispatch(postUser(firstName, lastName, email, password))

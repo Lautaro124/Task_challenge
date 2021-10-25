@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import style from '../../styles/default.module.css'
+import swal from 'sweetalert'
 import { putTask,  getTaskCompleted, getTaskPending, taskEdit } from '../../action/action'
 import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
@@ -14,12 +15,29 @@ export default function CardPending({_id, name, status, description, img}) {
     const user = useSelector(state => state.User)
     const arrImg = JSON.parse(img)
 
-    const handleChange = async (e) => {
+    const handleChange = (e) => {
 
         e.preventDefault()
-        await dispatch(putTask(_id, {name, status: true, description, img}))
-        dispatch(getTaskCompleted())
-        dispatch(getTaskPending())
+        swal({
+            title: 'Tarea completada',
+            text: 'Estas seguro/a de checkear esta tarea? Una vez checkeada no hay vuelta a tras',
+            icon: 'info',
+            buttons: true,
+            dangerMode: true,
+        }).then( () => {
+
+            dispatch(putTask(_id, {name, status: true, description, img}))
+    
+            dispatch(getTaskCompleted())
+            dispatch(getTaskPending())
+        }).catch(() => {
+            swal({
+                title: 'Tarea no completada',
+                text: 'Aveces no aceptar puede servir, pero no lo hagas conmigo :,D',
+                icon: 'success',
+                buttons: 'Aceptar'
+            })
+        })
     }
 
     
