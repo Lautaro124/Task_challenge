@@ -37,11 +37,12 @@ router.get('/completed', async (req: Request, res: Response, next: any) => {
 
 router.post('/', async (req: Request, res: Response, next: any) => {
     
-    const { name, img, status, reference } = req.body
+    const { name, img, reference } = req.body
 
     try{
+        console.log({ name, img, reference })
 
-        let task = await postTask(name, img, status, reference)
+        let task = await postTask(name, img, false, reference)
 
         res.json(task)
     }

@@ -1,7 +1,6 @@
-import {  GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, LOG_OUT } from'../action/constrain'
+import {  GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, LOG_OUT, LOGIN_AUTO } from'../action/constrain'
 
 const initialState = {
-    Task: [],
     Task_complete: [],
     Task_pending: [],
     User: {},
@@ -35,7 +34,7 @@ export default function reducer(state = initialState, action) {
         case POST_TASK:
             return {
                 ...state,
-                Tasks: [...state.Tasks, action.payload]
+                Task_pending: [...state.Task_pending, action.payload]
             }
             
         case PUT_TASK:
@@ -91,6 +90,12 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 User: {}
+            }
+            
+        case LOGIN_AUTO:
+            return {
+                ...state,
+                User: action.payload
             }
             
         default:

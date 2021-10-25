@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import style from '../../styles/default.module.css'
+import { postTask } from '../../action/action'
 import { Container, TextField, Checkbox, Typography, Button } from '@mui/material'
 import axios from 'axios'
 
 export default function Create() {
 
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.User)
     const [ imag, setImag ] = useState('')
     const [ name, setName ] = useState('')
     const [ reference, setReference ] = useState(null)
@@ -14,20 +18,23 @@ export default function Create() {
         data.append('file',imag)
         data.append('upload_preset','ImagesAdd')
 
-        await axios.post('htttps://api.cloudinary.com/v1_1/dwvnbejfd/image/upload', data)
+        const text = await axios.post('https://api.cloudinary.com/v1_1/dwvnbejfd/image/upload', data)
+        
+        return text.data
     }
 
     const detectedRef = (e) => {
 
         if(e){
-            setReference(localStorage.user._id)
-        }
-        else {
-            setReference(null)
+            setReference(user._id)
         }
     }
-    const onSubmit = () => {
 
+    const onSubmit = async(e) => {
+        e.preventDefault()
+        const url = await uploadImage()
+
+        dispatch(postTask(name, url.url, reference))
     }
 
     return (
@@ -55,7 +62,7 @@ export default function Create() {
                         </Typography>
                     </div>
                     <input type='file' className={style.input} onChange={ e => setImag(e.target.files[0])}/>
-                    <Button onClick={ onSubmit() }color='secondary' variant='contained'> Add task</Button>
+                    <Button onClick={e=> onSubmit(e) }color='secondary' variant='contained'> Add task</Button>
                 </form>
             </Container>
         </div>

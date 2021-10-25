@@ -57,7 +57,7 @@ export const getUser = async (email: string, password: string)=> {
 
     if(validate) {
 
-        return {...user, password: password }
+        return {...user, password}
     }
     return 'usuario no encontrado'
 }

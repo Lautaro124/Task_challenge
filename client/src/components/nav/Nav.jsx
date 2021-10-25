@@ -43,7 +43,7 @@ export default function Nav() {
                 {
                     local.firstName?
                     <Button color='inherit'  sx={{ gridRow: '1', gridColumn: '8' }} onClick={e => handlerLogOut(e)}>
-                        <LogoutIcon/>Log out
+                        Log out <LogoutIcon/>
                     </Button>:
                     <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '8' }}>
                         <Link to='/login' id={style.navLink} className={style.link}>

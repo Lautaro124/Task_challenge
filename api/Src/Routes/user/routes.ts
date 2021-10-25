@@ -7,7 +7,6 @@ router.get('/:email/:password', async (req: Request, res: Response, next: any) =
 
     const { email, password } = req.params
     try{ 
-        console.log( { email, password})
         let user = await getUser(email, password)
 
         res.json(user)

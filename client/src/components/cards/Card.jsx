@@ -9,18 +9,18 @@ export default function CardPending({_id, name, status, reference, img}) {
 
     const dispatch = useDispatch()
     const states = useSelector(state => state.Users)
+    const user = useSelector(state => state.User)
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
 
-        dispatch(putTask(_id, {name, status: e.target.checked, reference, img}))
-
+        await dispatch(putTask(_id, {name, status: e.target.checked, reference: user._id, img}))
         dispatch(getTaskCompleted())
-
         dispatch(getTaskPending())
     }
 
     let arrDemo = states.map(e => e.firstName + ' ' + e.lastName)
     let ref = states.filter(e => e._id === reference)
+
     return (
         <Accordion style={{ backgroundColor: 'rgb(61, 61, 61)', width: '98%', margin: 'auto'}}>
             
@@ -33,43 +33,55 @@ export default function CardPending({_id, name, status, reference, img}) {
 
                     {
                         !status?
+                        !!user.firstName?
                         <Checkbox onChange={e => handleChange(e)} sx={{color: 'white'}}/>:
+                        <Checkbox disabled/>:
                         <Checkbox disabled checked/>
-
                     }
                     <Typography variant='h6' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
                         {name}
                     </Typography>
                     
-                    <Autocomplete
-                        disablePortal
-                        options={arrDemo}
-                        sx={{ width: '100%'}}
-                        id='combo-box-demo'
-                        renderInput={(params) => 
-                            <TextField 
-                                {...params} 
-                                InputLabelProps={{className: style.text}}
-                                variant='filled'
-                                label= {ref.length === 1 ? ref[0].firstName : 'Add reference'} 
-                            />
-                        }
-                        onChange={e => console.log(e)}
-                    />
+                    {
+                        !status?
+                        user.firstName?
+                        <Autocomplete
+                            disablePortal
+                            options={arrDemo}
+                            sx={{ width: '100%'}}
+                            id='combo-box-demo'
+                            renderInput={(params) => 
+                                <TextField 
+                                    {...params} 
+                                    InputLabelProps={{className: style.text}}
+                                    variant='filled'
+                                    label= {ref.length === 1 ? ref[0].firstName : 'Add reference'} 
+                                />
+                            }
+                            onChange={e => console.log(e)}
+                        />:
+                        <Typography variant='span' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
+                            {ref.length === 1 ? 'Reference: '+ ref[0].firstName : 'Add reference'}
+                        </Typography>:
+                        <Typography variant='span' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
+                            { 'Reference: '+ ref[0]?.firstName }
+                        </Typography>
+                    }
 
                 </Box>
             </AccordionSummary>
 
             <AccordionDetails>
                 <div className={style.display}>
+                     
+                    <img className={style.img} src={img}/>
+                        
                     {
-                        img?
-                        <img className={style.img} src={img}/>:
-                        <Typography variant='h6' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
-                            No image
-                        </Typography>
+                        user.firstName && !status?
+                        <Button sx={{ height: '70%'}} color='secondary' variant='contained'>Edit task</Button>:
+                        null
+
                     }
-                    <Button sx={{ height: '70%'}} color='secondary' variant='contained'>Edit task</Button>
                 </div>
 
             </AccordionDetails>

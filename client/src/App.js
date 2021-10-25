@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getUser, getTaskPending, getTaskCompleted, getUserAll } from './action/action'
+import { autoLogin, getTaskPending, getTaskCompleted, getUserAll } from './action/action'
 import { Route, BrowserRouter } from 'react-router-dom'
 import Home from './components/home/Home'
 import Nav from './components/nav/Nav'
@@ -23,7 +23,7 @@ function App() {
 
       let user = JSON.parse(localStorage.user)
 
-      dispatch(getUser(user.email, user.password))
+      dispatch(autoLogin(user))
     }
 
   },[dispatch])

@@ -12,7 +12,7 @@ export default function Login() {
 
     const submited = () => {
 
-        dispatch(getUser('carrosqui@gmail.com','mfdo231'))
+        dispatch(getUser(email, password))
     }
 
     const emailHandler = (e) => {

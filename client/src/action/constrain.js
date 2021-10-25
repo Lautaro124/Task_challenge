@@ -9,4 +9,5 @@ module.exports = {
     GET_USER: 'GET_USER',
     POST_USER: 'POST_USER',
     LOG_OUT: 'LOG_OUT',
+    LOGIN_AUTO: 'LOGIN_AUTO'
 }

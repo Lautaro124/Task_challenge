@@ -8,6 +8,7 @@ import Card from '../cards/Card'
 
 export default function Home() {
 
+    const user = useSelector(state => state.User)
     const task_complete = useSelector(state => state.Task_complete)
     const task_pending = useSelector(state => state.Task_pending)
 
@@ -34,15 +35,20 @@ export default function Home() {
                                 />
                             ))
                         }
-                        <Link to='/addCard' className={styleDefault.link}>
-                        
-                            <Button 
-                                variant='contained' 
-                                style={{ backgroundColor: 'rgb(138, 3, 138)',color: 'white', margin: '2%', width: '80%'}}
-                            >
-                                <AddOutlinedIcon fontSize='small'/> Add task
-                            </Button>
-                        </Link>
+
+                        {
+                            user.firstName?
+                                <Link to='/addCard' className={styleDefault.link}>
+                                
+                                    <Button 
+                                        variant='contained' 
+                                        style={{ backgroundColor: 'rgb(138, 3, 138)',color: 'white', margin: '2%', width: '80%'}}
+                                    >
+                                        <AddOutlinedIcon fontSize='small'/> Add task
+                                    </Button>
+                                </Link>:
+                                null
+                        }
 
                     </div>
 
