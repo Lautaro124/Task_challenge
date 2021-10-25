@@ -7,6 +7,7 @@ import Nav from './components/nav/Nav'
 import Create from './components/createCard/Create'
 import Register from './components/acunt/register/Register'
 import Login from './components/acunt/login/Login'
+import Edit from './components/edit/Edit'
 import './App.css'
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/addCard' component={Create} />
         <Route path= '/register' component={Register} />
         <Route path= '/login' component={Login} />
+        <Route path= '/edit' component={Edit}/>
       </div>
     </BrowserRouter>
   );

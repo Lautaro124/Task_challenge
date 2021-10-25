@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express"
-import { getTask, postTask, putTask, getUserId } from '../functions'
+import { getTask, postTask, putTask } from '../functions'
 
 const router = express()
 
@@ -37,12 +37,11 @@ router.get('/completed', async (req: Request, res: Response, next: any) => {
 
 router.post('/', async (req: Request, res: Response, next: any) => {
     
-    const { name, img, reference } = req.body
+    const { name, img , description } = req.body
 
     try{
-        console.log({ name, img, reference })
 
-        let task = await postTask(name, img, false, reference)
+        let task = await postTask(name, img, false, description )
 
         res.json(task)
     }
@@ -55,10 +54,10 @@ router.post('/', async (req: Request, res: Response, next: any) => {
 router.put('/:id', async (req: Request, res: Response, next: any) => {
 
     const idTask = req.params.id
-    const { name, img, status, reference } = req.body
+    const { name, img, status, description } = req.body
 
     try {
-        let task = await putTask( idTask, name, img, status, reference )
+        let task = await putTask( idTask, name, img, status, description )
 
         res.json(task)
     }

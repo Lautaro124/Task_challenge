@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import style from '../../../styles/default.module.css'
 import { getUser } from '../../../action/action'
 import { Container, Button, TextField } from '@mui/material'
@@ -55,7 +56,11 @@ export default function Login() {
                         onChange={e => passwordHandler(e)}
                     />
 
-                    <Button onClick={() =>submited()} sx={{marginTop: '2%'}} color='secondary' variant='contained'>Login</Button>
+                    <Button onClick={() =>submited()} sx={{marginTop: '2%'}} color='secondary' variant='contained'>
+                        <Link to='/' id={style.navLink} className={style.link}>
+                            Login
+                        </Link>
+                    </Button>
                 </form>
             </Container>
         </div>

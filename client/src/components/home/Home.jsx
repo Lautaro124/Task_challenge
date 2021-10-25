@@ -29,7 +29,7 @@ export default function Home() {
                                     key={index}
                                     _id={e._id}
                                     name={e.name} 
-                                    reference={e.reference? e.reference: null} 
+                                    description={e.description} 
                                     status={e.status}
                                     img={e.img} 
                                 />
@@ -65,7 +65,7 @@ export default function Home() {
                                 <Card 
                                     key={index}
                                     name={e.name} 
-                                    reference={e.reference} 
+                                    description={e.description} 
                                     status={e.status}
                                     img={e.img}
                                 />

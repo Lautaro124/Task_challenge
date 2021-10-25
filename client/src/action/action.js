@@ -1,4 +1,15 @@
-import { URL,GET_TASK_PENDING, GET_TASK_COMPLETED, GET_USER_ID, POST_TASK, PUT_TASK, GET_USER, POST_USER, LOG_OUT, LOGIN_AUTO } from'./constrain'
+import { 
+    URL,GET_TASK_PENDING, 
+    GET_TASK_COMPLETED, 
+    GET_USER_ID, 
+    POST_TASK, 
+    PUT_TASK, 
+    GET_USER, 
+    POST_USER, 
+    LOG_OUT, 
+    LOGIN_AUTO,
+    TASK_EDIT
+ } from'./constrain'
 import axios from 'axios'
 
 export const getTaskCompleted = () => {
@@ -41,10 +52,10 @@ export const getTaskPending = () => {
     }
 }
 
-export const postTask = (name, url, reference) => {
+export const postTask = (name, url, description) => {
 
     return async function (dispatch){
-        const task = await axios.post(`${URL}/Task`, {name, img: url, reference})
+        const task = await axios.post(`${URL}/Task`, {name, img: url, description})
 
         return dispatch({
             type: POST_TASK,
@@ -146,6 +157,17 @@ export const autoLogin = (user) => {
         return dispatch({
             type: LOGIN_AUTO,
             payload: user
+        })
+    }
+}
+
+export const taskEdit = (task) => {
+
+    return function (dispatch) {
+
+        return dispatch({
+            type: TASK_EDIT,
+            payload: task
         })
     }
 }

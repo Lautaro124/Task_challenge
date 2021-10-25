@@ -1,25 +1,29 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import style from '../../styles/default.module.css'
-import { putTask,  getTaskCompleted, getTaskPending } from '../../action/action'
-import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Autocomplete, TextField, Button } from '@mui/material'
+import { putTask,  getTaskCompleted, getTaskPending, taskEdit } from '../../action/action'
+import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-export default function CardPending({_id, name, status, reference, img}) {
+export default function CardPending({_id, name, status, description, img}) {
 
     const dispatch = useDispatch()
-    const states = useSelector(state => state.Users)
     const user = useSelector(state => state.User)
 
     const handleChange = async (e) => {
 
-        await dispatch(putTask(_id, {name, status: e.target.checked, reference: user._id, img}))
+        await dispatch(putTask(_id, {name, status: e.target.checked, description}))
         dispatch(getTaskCompleted())
         dispatch(getTaskPending())
     }
 
-    let arrDemo = states.map(e => e.firstName + ' ' + e.lastName)
-    let ref = states.filter(e => e._id === reference)
+    
+    const send = async (e) => {
+        
+        e.preventDefault()
+        await dispatch(taskEdit({_id, name, status, description, img}))
+    }
 
     return (
         <Accordion style={{ backgroundColor: 'rgb(61, 61, 61)', width: '98%', margin: 'auto'}}>
@@ -41,33 +45,6 @@ export default function CardPending({_id, name, status, reference, img}) {
                     <Typography variant='h6' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
                         {name}
                     </Typography>
-                    
-                    {
-                        !status?
-                        user.firstName?
-                        <Autocomplete
-                            disablePortal
-                            options={arrDemo}
-                            sx={{ width: '100%'}}
-                            id='combo-box-demo'
-                            renderInput={(params) => 
-                                <TextField 
-                                    {...params} 
-                                    InputLabelProps={{className: style.text}}
-                                    variant='filled'
-                                    label= {ref.length === 1 ? ref[0].firstName : 'Add reference'} 
-                                />
-                            }
-                            onChange={e => console.log(e)}
-                        />:
-                        <Typography variant='span' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
-                            {ref.length === 1 ? 'Reference: '+ ref[0].firstName : 'Add reference'}
-                        </Typography>:
-                        <Typography variant='span' sx={{ width: '35%', flexShrink: 0, color: 'white' }}>
-                            { 'Reference: '+ ref[0]?.firstName }
-                        </Typography>
-                    }
-
                 </Box>
             </AccordionSummary>
 
@@ -75,10 +52,31 @@ export default function CardPending({_id, name, status, reference, img}) {
                 <div className={style.display}>
                      
                     <img className={style.img} src={img}/>
-                        
+                    
+                    
+                    <Typography variant='span' sx={{color: 'white' }}>
+                        Descripción: {' '+ description}
+                    </Typography>
+                    
                     {
                         user.firstName && !status?
-                        <Button sx={{ height: '70%'}} color='secondary' variant='contained'>Edit task</Button>:
+
+                            <Button 
+                                onClick={(e) => {
+                                    send(e)
+                                }}
+                                sx={{ height: '100%', width: '100%' }} 
+                                color='secondary' 
+                                variant='contained'
+                            >
+                                <Link  
+                                    to='/edit' 
+                                    className={style.link}
+                                    id={style.navLink}
+                                >
+                                     Edit task
+                                </Link>
+                            </Button>:
                         null
 
                     }

@@ -3,8 +3,8 @@ import { Schema } from 'mongoose'
 interface Task {
     name: string;
     img: string;
+    description: string;
     status: boolean | string;
-    reference?: Schema.Types.ObjectId;
 }
 
 const task = new Schema<Task> ({
@@ -27,8 +27,8 @@ const task = new Schema<Task> ({
             return true;
         }
     } },
+    description: { type: String, required: true },
     status: { type: Boolean, required: true, default: false },
-    reference: { type: Schema.Types.ObjectId, required: false, ref: 'users'}
 })
 
 export default task

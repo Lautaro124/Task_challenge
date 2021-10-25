@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import style from '../../../styles/default.module.css'
-import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { postUser } from '../../../action/action'
-import { Container, Button, TextField, Typography} from '@mui/material'
+import { Container, Button, TextField } from '@mui/material'
 
 export default function Register() {
 
@@ -11,7 +12,8 @@ export default function Register() {
     const [ lastName, setlastName ] = useState('')
     const [ email, setemail ] = useState('')
     const [ password, setpassword ] = useState('') 
-    
+    const users = useSelector(state => state.Users)
+
     const submit = (e) => {
         e.preventDefault()
         const reEmail = /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
@@ -19,7 +21,11 @@ export default function Register() {
         if(!reEmail.test(email)) {
             return alert('Email erroneo')
         }
-
+        
+        if(users.find(e => e.firstName === firstName)){
+            return alert('Su nombre ya se encuentra en registrado')
+        }
+        
         dispatch(postUser(firstName, lastName, email, password))
     }
     const handlerChange = (e) => {
@@ -28,15 +34,22 @@ export default function Register() {
 
             case 'firstName':
                 setfirstName(e.target.value)
+                break;
             
             case 'lastName':
                 setlastName(e.target.value)
+                break;
             
             case 'email':
                 setemail( e.target.value)
+                break;
 
             case 'password':
                 setpassword(e.target.value)
+                break;
+            
+            default:
+                return ;
         }
     }
 
@@ -53,7 +66,7 @@ export default function Register() {
                         InputLabelProps={{className: style.text}}
                         InputProps={{className: style.text}}
                         id='outlined-required' 
-                        label='First Name' 
+                        label='User' 
                         variant='filled'
                         onChange={e => handlerChange(e)}
                     />
@@ -66,7 +79,7 @@ export default function Register() {
                         InputLabelProps={{className: style.text}}
                         InputProps={{className: style.text}}
                         id='outlined-required' 
-                        label='Last Name' 
+                        label='Name' 
                         variant='filled'
                         onChange={e => handlerChange(e)}
                     />
@@ -98,7 +111,11 @@ export default function Register() {
                         onChange={e => handlerChange(e)}
                     />
 
-                    <Button onClick={e => submit(e)} sx={{marginTop: '2%'}} color='secondary' variant='contained'> Register</Button>
+                    <Button onClick={e => submit(e)} sx={{marginTop: '2%'}} color='secondary' variant='contained'> 
+                        <Link to='/' id={style.navLink} className={style.link}>
+                            Register
+                        </Link>
+                    </Button>
                 </form>
             </Container>
         </div>

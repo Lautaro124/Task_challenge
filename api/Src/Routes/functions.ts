@@ -9,43 +9,28 @@ export const getTask = async () => {
     return model
 }
 
-export const postTask = async (name: string, img: string, status: Boolean, reference?: string) => {
+export const postTask = async (name: string, img: string, status: Boolean, description: string) => {
 
     let urlValidate: Boolean = validationUrl(img)
 
     if(urlValidate){
 
-        if(reference){
-
-            await TaskModel.create({name, img, status, reference})
+        await TaskModel.create({name, img, status, description})
+    
+        return {name, img, status, description}
         
-            return {name, img, status, reference}
-        }
-        else{ 
-
-            await TaskModel.create({name, img, status})
-        
-            return {name, img, status}
-        }
-    }
-    else{
-        return 'Parametros incorrectos'
     }
 }
 
-export const putTask = async (idTask: string, name: string, img: string, status: string | boolean , reference: any ) => {
+export const putTask = async (idTask: string, name: string, img: string, status: string | boolean , description: string) => {
 
     let urlValidate: Boolean = validationUrl(img)
 
     if(urlValidate){
         
-        await TaskModel.findByIdAndUpdate(idTask, {name, img, status, reference})
+        await TaskModel.findByIdAndUpdate(idTask, {name, img, status, description})
 
-        return {name, img, status, reference}
-    }
-    else{ 
-
-        return 'Parametros incorrectos'
+        return {name, img, status, description}
     }
 }
 
@@ -59,7 +44,8 @@ export const getUser = async (email: string, password: string)=> {
 
         return {...user, password}
     }
-    return 'usuario no encontrado'
+
+    
 }
 
 export const getUserId = async () => {
