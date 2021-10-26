@@ -3,11 +3,12 @@
 Para poder usar esta aplicacion web tiene que seguir los siguientes pasos:
 
 ### `Primer paso`
-Forkear el proyecto o/y clonarlo en tu escritorio. `En caso de no saber como hacerlo mira este documento` 
+Forkear el proyecto y/o clonarlo en tu escritorio. <br/>
+`En caso de no saber como hacerlo mira este documento` 
 [Forkear o Clonar repositorios en GitHub](https://docs.github.com/es/get-started/quickstart/fork-a-repo)
 
 ### `Segundo paso`
-  Una vez Clonado el repositorio en tu escritorio o archivo. Deberas pararte dentro del archivo Task_challenge
+  Una vez clonado el repositorio en tu escritorio o archivo. Deberas pararte dentro del archivo Task_challenge
   y abir la consola, una vez abierta y estando parados en el archivo correspondiente procederas a escribir los siguientes comandos:
 
   #### cd api/
@@ -35,7 +36,7 @@ Cuando halla termindo las instalaciones, usted debera abrir 2 consolas diferente
 
 # Lenguaje/s usado/s
 
-Javascript 
+Javascript, Typescript
 
 # Framework/s usado/s
 
