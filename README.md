@@ -35,7 +35,7 @@ Cuando halla termindo las instalaciones, usted debera abrir 2 consolas diferente
 
 # Lenguaje/s usado/s
 
-Javascript 
+Javascript, Typescript
 
 # Framework/s usado/s
 
