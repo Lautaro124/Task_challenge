@@ -36,7 +36,7 @@ Javascript
 
 # Framework/s usado/s
 
-React.js, Express.js, Nodejs, Mongoose
+React.js, Express.js, Nodejs
 
 # Módulos principales
 
