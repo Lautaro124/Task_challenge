@@ -45,7 +45,7 @@ React.js, Express.js, Nodejs
 # Módulos principales
 
 ### paquetes npm
-
+#### `Back`
 typescript --save-dev ||
 nodemon ||
 express ||
@@ -60,6 +60,7 @@ mocha ||
 argon2 ||
 cross ||
 @types/cookie-parser ||
+#### `Front`
 @mui/material @emotion/react @emotion/styled ||
 @mui/icons-material ||
 react-redux ||
