@@ -21,7 +21,7 @@ Forkear el proyecto y/o clonarlo en tu escritorio. <br/>
 #### npm i
 
 ### `Tercer paso`
-Cuando halla termindo las instalaciones, usted debera abrir 2 consolas diferentes Y escribir 
+Cuando halla termindo las instalaciones cierre la consola y abra 2 consolas diferentes Y escribir 
  en el siguiente orden los comandos:
  
 ### Consola 1
