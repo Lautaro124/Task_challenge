@@ -5,6 +5,8 @@ import { putTask } from '../../action/action'
 import axios from 'axios'
 import style from '../../styles/default.module.css'
 import { Container, TextField, Button } from '@mui/material'
+import AwesomeSlider from 'react-awesome-slider'
+import 'react-awesome-slider/dist/styles.css'
 
 export default function Edit() {
 
@@ -77,6 +79,15 @@ export default function Edit() {
                     </Link> 
                 </Button>
             </form>
+            <div id={style.divSecuense}> 
+                <AwesomeSlider animation="cubeAnimation">
+                    {
+                        url?.map((e, index) => (
+                            <div key={index} data-src={e} className={style.img}></div>
+                        ))
+                    }
+                </AwesomeSlider>
+            </div>
         </Container>
     )
 }

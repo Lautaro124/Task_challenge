@@ -5,6 +5,8 @@ import style from '../../styles/default.module.css'
 import { postTask } from '../../action/action'
 import { Container, TextField, Button } from '@mui/material'
 import axios from 'axios'
+import AwesomeSlider from 'react-awesome-slider'
+import 'react-awesome-slider/dist/styles.css'
 
 export default function Create() {
 
@@ -14,7 +16,7 @@ export default function Create() {
     const [ description, setDescription ] = useState('')
 
     const uploadImage = async (e) => {
-        
+
         const data = new FormData()
         data.append('file',e)
         data.append('upload_preset','ImagesAdd')
@@ -65,6 +67,7 @@ export default function Create() {
                     />
 
                     <input type='file' className={style.input} onChange={ e => uploadImage(e.target.files[0])}/>
+
                     {
                         name !== '' && description !== ''?
                         
@@ -79,6 +82,15 @@ export default function Create() {
                         </Button>
                     }
                 </form>
+                <div id={style.divSecuense}> 
+                    <AwesomeSlider animation="cubeAnimation">
+                        {
+                            urls?.map((e, index) => (
+                                <div key={index} data-src={e} className={style.img}></div>
+                            ))
+                        }
+                    </AwesomeSlider>
+                </div>
             </Container>
         </div>
     )

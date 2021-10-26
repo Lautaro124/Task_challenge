@@ -6,8 +6,8 @@ import swal from 'sweetalert'
 import { putTask, taskEdit, getTaskCompleted, getTaskPending } from '../../action/action'
 import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
+import AwesomeSlider from 'react-awesome-slider'
+import 'react-awesome-slider/dist/styles.css'
 
 export default function CardPending({_id, name, status, description, img}) {
 

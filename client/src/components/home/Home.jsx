@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styleDefault from '../../styles/default.module.css'
 import { Container, Button, Typography} from '@mui/material'
@@ -8,7 +8,6 @@ import Card from '../cards/Card'
 
 export default function Home() {
 
-    const dispatch = useDispatch()
     const user = useSelector(state => state.User)
     const task_complete = useSelector(state => state.Task_complete)
     const task_pending = useSelector(state => state.Task_pending)
