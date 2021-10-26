@@ -4,7 +4,7 @@ import { autoLogin, getTaskPending, getTaskCompleted, getUserAll } from './actio
 import { Route, BrowserRouter } from 'react-router-dom'
 import Home from './components/home/Home'
 import Nav from './components/nav/Nav'
-import Create from './components/createCard/Create'
+import Create from './components/createCard/create.jsx'
 import Register from './components/acunt/register/Register'
 import Login from './components/acunt/login/Login'
 import Edit from './components/edit/Edit'

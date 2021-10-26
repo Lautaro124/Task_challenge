@@ -21,7 +21,7 @@ export default function CardPending({_id, name, status, description, img}) {
         e.preventDefault()
         swal({
             title: 'Proceso de completado',
-            text: 'Estas seguro/a de checkear esta tarea? Una vez checkeada no hay vuelta a tras',
+            text: 'Estas seguro/a de checkear esta tarea? Una vez checkeada no hay vuelta atras',
             icon: 'info',
             buttons: true,
             dangerMode: true,
