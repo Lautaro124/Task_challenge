@@ -1,15 +1,15 @@
 # Task_challenge
 
-Para poder usar esta aplicacion web tiene que seguir los siguientes pasos
+Para poder usar esta aplicacion web tiene que seguir los siguientes pasos:
 
 ### Primer paso 
 Forkear el proyecto o/y clonarlo en tu escritorio
 
 ### Segundo paso 
-entrar a la consola dentro del archivo principal y escribir las siguentes lineas en el mismo orden.
+  desde la consola el archivo principal y escribir las siguentes lineas en este orden:
 
-#### cd api/
-#### npm i
+  #### cd api/
+  #### npm i
 
 (Esperar a que termine de instalar)
 
