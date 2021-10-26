@@ -6,6 +6,7 @@ import UserRoute from './Routes/user/routes'
 import TaskRoute from './Routes/task/routes'
 import bodyParser from "body-parser"
 import cookieparser from 'cookie-parser'
+import argon2 from 'argon2'
 
 dotenv.config()
 
@@ -17,7 +18,7 @@ const cors = (req: Request, res: Response, next: any) => {
 }
 
 const conect = async (): Promise<void>  => {
-    const url: string | undefined = process.env.URL
+    const url: string | undefined = process.env.URL? process.env.URL :'mongodb+srv://chucho:Malditapaloma1@portafolio.t6haw.mongodb.net/ChallengeTest'
     
     await mongoose.connect(`${url}`)
 }
