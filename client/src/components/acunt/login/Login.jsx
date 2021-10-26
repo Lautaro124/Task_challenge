@@ -58,7 +58,7 @@ export default function Login() {
 
                     <Button onClick={() =>submited()} sx={{marginTop: '2%'}} color='secondary' variant='contained'>
                         <Link to='/' id={style.navLink} className={style.link}>
-                            Login
+                            Iniciar sesión
                         </Link>
                     </Button>
                 </form>

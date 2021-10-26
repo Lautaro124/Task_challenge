@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import style from '../../styles/default.module.css'
 import { postTask } from '../../action/action'
@@ -28,9 +28,11 @@ export default function Create() {
     const onSubmit = async(e) => {
         e.preventDefault()
 
+            
         const strinImg = JSON.stringify(urls)
-
+        
         dispatch(postTask(name, strinImg, description))
+        
     }
 
     return (
@@ -68,12 +70,12 @@ export default function Create() {
                         
                         <Button onClick={e=> onSubmit(e) } color='secondary' variant='contained'> 
                             <Link to='/' id={style.navLink} className={style.link}>
-                                Add task
+                                Crear tarea
                             </Link>
                         </Button>:
 
                         <Button disabled onClick={e=> onSubmit(e) } color='secondary' variant='contained'> 
-                            Add task
+                            Crear tarea
                         </Button>
                     }
                 </form>

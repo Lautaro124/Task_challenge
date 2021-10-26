@@ -55,7 +55,6 @@ router.put('/:id', async (req: Request, res: Response, next: any) => {
 
     const idTask = req.params.id
     const { name, img, status, description } = req.body
-
     try {
         let task = await putTask( idTask, name, img, status, description )
 

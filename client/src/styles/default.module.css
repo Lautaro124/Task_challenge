@@ -83,8 +83,8 @@
 .display{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 85% 15%;
-    gap: 2%;
+    grid-template-rows: 1fr 5vh;
+    gap: 2vh;
 }
 
 .imgConten{

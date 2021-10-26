@@ -27,27 +27,29 @@ export default function Nav() {
             }}>
                 <Link to='/' className={style.link}>
                     <Typography variant='h6' sx={{gridRow: '1', gridColumn: '1'}}>
-                        List to do
+                        Listado de tareas
                     </Typography>
                 </Link>
 
                 {
                     local.firstName?
                     <Typography variant='h6' sx={{ gridRow: '1', gridColumn: '7' }}>{local.firstName}</Typography>:
+
                     <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '7' }}>
                         <Link to='/register' id={style.navLink} className={style.link}>
-                            Register
+                            Registrarse
                         </Link>
                     </Button>
                 }
                 {
                     local.firstName?
                     <Button color='inherit'  sx={{ gridRow: '1', gridColumn: '8' }} onClick={e => handlerLogOut(e)}>
-                        Log out <LogoutIcon/>
+                        cerrar sesión <LogoutIcon/>
                     </Button>:
+
                     <Button color='inherit' variant='outlined' sx={{ gridRow: '1', gridColumn: '8' }}>
                         <Link to='/login' id={style.navLink} className={style.link}>
-                            Login
+                            Iniciar sesión
                         </Link>
                     </Button>
 

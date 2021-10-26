@@ -124,7 +124,7 @@ export default function Register() {
 
                     <Button onClick={e => submit(e)} sx={{marginTop: '2%'}} color='secondary' variant='contained'> 
                         <Link to='/' id={style.navLink} className={style.link}>
-                            Register
+                            Registrarse
                         </Link>
                     </Button>
                 </form>

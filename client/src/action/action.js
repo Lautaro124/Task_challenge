@@ -88,6 +88,7 @@ export const putTask = (idTask, change) => {
 
         try{
 
+            
             const task = await axios.put(`${URL}/Task/${idTask}`, {...change})
 
             swal({ 

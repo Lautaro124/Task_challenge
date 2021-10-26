@@ -9,9 +9,9 @@ export const getTask = async () => {
     return model
 }
 
-export const postTask = async (name: string, img: string | undefined, status: Boolean, description: string) => {
+export const postTask = async (name: string, img: string , status: Boolean, description: string) => {
 
-    if(img){
+    if(img !== '[]'){
 
         let urlValidate: Boolean = validationUrl(img)
     
@@ -33,13 +33,21 @@ export const postTask = async (name: string, img: string | undefined, status: Bo
 
 export const putTask = async (idTask: string, name: string, img: string, status: string | boolean , description: string) => {
 
-    let urlValidate: Boolean = validationUrl(img)
+    if(img !== '[]'){
 
-    if(urlValidate){
-        
-        await TaskModel.findByIdAndUpdate(idTask, {name, img, status, description})
+        let urlValidate: Boolean = validationUrl(img)
+    
+        if(urlValidate){
+            
+            await TaskModel.findByIdAndUpdate(idTask, {name, img, status, description})
+    
+            return {name, img, status, description}
+        }
+    }else{
 
-        return {name, img, status, description}
+        await TaskModel.findByIdAndUpdate(idTask, {name, status, description})
+    
+        return {name, status, description}
     }
 }
 
