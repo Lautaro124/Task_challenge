@@ -69,6 +69,7 @@ export default function Edit() {
                     InputProps={{className: style.text}}
                     id='outlined-required' 
                     label={'Descripción: '+task.description} 
+                    multiline
                     variant='filled' 
                     onChange={e => setDescription(e.target.value)}
                 />

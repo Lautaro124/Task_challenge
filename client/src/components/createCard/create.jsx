@@ -64,6 +64,7 @@ export default function Create() {
                         InputProps={{className: style.text}}
                         onChange={e => setDescription(e.target.value)}
                         id='outlined-required' 
+                        multiline
                         label='Descripción' 
                         variant='filled' 
                     />
