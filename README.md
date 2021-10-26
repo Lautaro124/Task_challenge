@@ -1,15 +1,17 @@
 # Task_challenge
 
-Para poder usar esta aplicacion web tiene que seguir los siguientes pasos
+Para poder usar esta aplicacion web tiene que seguir los siguientes pasos:
 
-### Primer paso 
-Forkear el proyecto o/y clonarlo en tu escritorio
+### `Primer paso`
+Forkear el proyecto o/y clonarlo en tu escritorio. `En caso de no saber como hacerlo mira este documento` 
+[Forkear o Clonar repositorios en GitHub](https://docs.github.com/es/get-started/quickstart/fork-a-repo)
 
-### Segundo paso 
-entrar a la consola dentro del archivo principal y escribir las siguentes lineas en el mismo orden.
+### `Segundo paso`
+  Una vez Clonado el repositorio en tu escritorio o archivo. Deberas pararte dentro del archivo Task_challenge
+  y abir la consola, una vez abierta y estando parados en el archivo correspondiente procederas a escribir los siguientes comandos:
 
-#### cd api/
-#### npm i
+  #### cd api/
+  #### npm i
 
 (Esperar a que termine de instalar)
 
@@ -17,14 +19,15 @@ entrar a la consola dentro del archivo principal y escribir las siguentes lineas
 #### cd client/
 #### npm i
 
-### Tercer paso 
-Ahora usted debera abrir 2 consolas diferentes, y escribir lo siguiente en el mismo orden.
-
+### `Tercer paso`
+Cuando halla termindo las instalaciones, usted debera abrir 2 consolas diferentes Y escribir 
+ en el siguiente orden los comandos:
+ 
+### Consola 1
 #### cd api/
 #### npm start
 
-(Ahora en la otra consola tendra que escribir)
-
+### Consola 2
 #### cd client/
 #### npm start
 
