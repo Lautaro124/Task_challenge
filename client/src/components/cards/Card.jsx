@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import style from '../../styles/default.module.css'
 import swal from 'sweetalert'
-import { putTask, taskEdit, getTaskCompleted, getTaskPending } from '../../action/action'
+import { checktask, taskEdit } from '../../action/action'
 import { Checkbox, Accordion, AccordionDetails, AccordionSummary, Typography, Box, Button } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import AwesomeSlider from 'react-awesome-slider'
@@ -13,9 +13,9 @@ export default function CardPending({_id, name, status, description, img}) {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.User)
-    const [ check, setCheck ] = useState(false)
     const arrImg = img? JSON.parse(img) : null
 
+    /// Accion para completar la tarea
     const handleChange = (e) => {
 
         e.preventDefault()
@@ -30,11 +30,11 @@ export default function CardPending({_id, name, status, description, img}) {
             if(verify){
 
                 const imag = img? img: '[]'
-                dispatch(putTask(_id, {name, status: true, img: imag, description}))
-                setCheck(true)
+                dispatch(checktask(_id, {name, status: true, img: imag, description}))
+                
             }else{
 
-                setCheck(false)
+                
                 swal({
                     title: 'Tarea no completada',
                     text: 'Aveces no aceptar puede servir, pero no lo hagas conmigo :,D',
@@ -45,7 +45,7 @@ export default function CardPending({_id, name, status, description, img}) {
 
         }).catch(() => {
 
-            setCheck(false)
+           
             swal({
                 title: 'ERROR!!',
                 text: 'oh no, ocurrio algo inesperado',
@@ -55,23 +55,17 @@ export default function CardPending({_id, name, status, description, img}) {
         })
     }
 
-    useEffect( ()=> {
-
-        dispatch(getTaskPending())
-        dispatch(getTaskCompleted())
-
-    },[check])
-
-    
-    const send = async (e) => {
+    /// Accion para obtener los datos de la tarea 
+    const send = (e) => {
         
         e.preventDefault()
-        await dispatch(taskEdit({_id, name, status, description, img}))
+        dispatch(taskEdit({_id, name, status, description, img}))
     }
 
     return (
         <Accordion style={{ backgroundColor: 'rgb(61, 61, 61)', width: '98%', margin: 'auto'}}>
-            
+
+            {/* Datos principales */}
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1bh-content'
@@ -82,7 +76,7 @@ export default function CardPending({_id, name, status, description, img}) {
                     {
                         !status?
                         !!user.firstName?
-                        <Checkbox checked={check} onChange={e => handleChange(e)} sx={{color: 'white'}}/>:
+                        <Checkbox checked={status} onChange={e => handleChange(e)} sx={{color: 'white'}}/>:
                         <Checkbox disabled/>:
                         <Checkbox disabled checked/>
                     }
@@ -94,6 +88,7 @@ export default function CardPending({_id, name, status, description, img}) {
                 </Box>
             </AccordionSummary>
 
+            {/* Despliegue de datos */}
             <AccordionDetails>
                 <div className={style.display}>
 
@@ -101,7 +96,7 @@ export default function CardPending({_id, name, status, description, img}) {
                         img?
 
                         <div className={style.imgConten}>
-                        <AwesomeSlider>
+                            <AwesomeSlider>
                                 {    
                                     arrImg?.map((e, index) => (
                                         
@@ -116,7 +111,7 @@ export default function CardPending({_id, name, status, description, img}) {
                     
                     {
                         img?
-                        <Typography variant='span' sx={{ gridRow: '1', gridColumn: '1', width: '100%', height: '100%', color: 'white' }}>
+                        <Typography variant='span' sx={{ gridRow: '1', gridColumn: '2', width: '100%', height: '100%', color: 'white' }}>
                             Descripción: {' '+ description}
                         </Typography>:
 

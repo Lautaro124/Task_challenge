@@ -12,11 +12,12 @@ export default function Edit() {
 
     const dispatch = useDispatch()
     const task = useSelector(state => state.Task)
-    const [ img, setImg] = useState(task.img)
+    const [ img ] = useState(task.img)
     const [ url, setUrl] = useState([])
     const [ newName, setNewName ] = useState(task.name)
     const [ descrition, setDescription ] = useState(task.description)
 
+    /// Subida de imagenes a cloudinary
     const upload = async (e) =>{
 
         const data = new FormData()
@@ -35,6 +36,7 @@ export default function Edit() {
         return text.data.url
     }
 
+    /// Accion para cambiar los datos de la tarea
     const onSubmit = async (data) => {
         data.preventDefault()
 
@@ -79,6 +81,7 @@ export default function Edit() {
                     </Link> 
                 </Button>
             </form>
+            {/* Pre view de imagenes */}
             <div id={style.divSecuense}> 
                 <AwesomeSlider animation="cubeAnimation">
                     {

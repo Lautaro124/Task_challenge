@@ -8,7 +8,8 @@ import {
     POST_USER, 
     LOG_OUT, 
     LOGIN_AUTO,
-    TASK_EDIT
+    TASK_EDIT,
+    TASK_CHECK
 } from'./constrain'
 import swal from 'sweetalert'
 import axios from 'axios'
@@ -60,7 +61,18 @@ export const postTask = (name, url, description) => {
         try{
             
             const task = await axios.post(`${URL}/Task`, {name, img: url, description})
-    
+            const  incompleteTask = await axios.get(`${URL}/Task/pending`)
+            const completeTask = await axios.get(`${URL}/Task/completed`)
+
+            const tasks_incomplete = incompleteTask.data.map(e => {
+                if(e._id === task.data._id){
+                    return task.data
+                }
+                else{
+                    return e
+                }
+            })
+
             swal({ 
                 title: 'Tarea creada',
                 text: 'Tarea creada exitosamente',
@@ -69,7 +81,54 @@ export const postTask = (name, url, description) => {
             })
             return dispatch({
                 type: POST_TASK,
-                payload: task.data
+                payload: {
+                    tasks_complete: completeTask.data,
+                    tasks_incomplete,
+                }
+            })
+        }
+        catch(err) {
+            swal({ 
+                title: 'Tarea no creada',
+                text: err.message,
+                icon: 'error',
+                button: 'Aceptar'
+            })
+        }
+    }
+}
+
+
+export const checktask = (idTask, change) => {
+
+    return async function (dispatch){
+
+        try{
+            
+            const task = await axios.put(`${URL}/Task/${idTask}`, {...change})
+            const  incompleteTask = await axios.get(`${URL}/Task/pending`)
+            const completeTask = await axios.get(`${URL}/Task/completed`)
+
+            const tasks_complete = completeTask.data.map(e => {
+                if(e._id === task.data._id){
+                    return task.data
+                }
+                else{
+                    return e
+                }
+            })
+            swal({ 
+                title: 'Tarea creada',
+                text: 'Tarea creada exitosamente',
+                icon: 'success',
+                button: 'Aceptar'
+            })
+            return dispatch({
+                type: TASK_CHECK,
+                payload: {
+                    tasks_complete,
+                    tasks_incomplete: incompleteTask.data
+                }
             })
         }
         catch(err) {
@@ -87,21 +146,32 @@ export const putTask = (idTask, change) => {
     return async function (dispatch) {
 
         try{
-
             
             const task = await axios.put(`${URL}/Task/${idTask}`, {...change})
+            const  incompleteTask = await axios.get(`${URL}/Task/pending`)
+            const completeTask = await axios.get(`${URL}/Task/completed`)
 
+            const tasks_complete = completeTask.data.map(e => {
+                if(e._id === task.data._id){
+                    return task.data
+                }
+                else{
+                    return e
+                }
+            })
             swal({ 
-                title: 'Tarea cambiada',
-                text: 'Su tarea fue creada exitosamente',
+                title: 'Tarea creada',
+                text: 'Tarea creada exitosamente',
                 icon: 'success',
                 button: 'Aceptar'
             })
             return dispatch({
                 type: PUT_TASK,
-                payload: task.data,
+                payload: {
+                    tasks_complete,
+                    tasks_incomplete: incompleteTask.data
+                }
             })
-
         }
         catch(err){
 
@@ -175,7 +245,7 @@ export const postUser = (firstName, lastName, email, password) => {
             swal({ 
                 title: 'Registrado :D',
                 text: 'Bienvenido, ten linda estadia aqui',
-                icon: 'successs',
+                icon: 'success',
                 button: 'Aceptar'
             })
 

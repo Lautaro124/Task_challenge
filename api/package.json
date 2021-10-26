@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon Src/index.ts --excec ts-node",
+    "start": "ts-node Src/index.ts",
     "test": "mocha -w ./*.test.js"
   },
   "author": "Lautaro Gonzalez",

@@ -15,6 +15,7 @@ export default function Create() {
     const [ name, setName ] = useState('')
     const [ description, setDescription ] = useState('')
 
+    /// Subida de imagenes a cloudinary
     const uploadImage = async (e) => {
 
         const data = new FormData()
@@ -27,6 +28,7 @@ export default function Create() {
     }
 
 
+    /// Creacion de tareas
     const onSubmit = async(e) => {
         e.preventDefault()
 
@@ -82,6 +84,7 @@ export default function Create() {
                         </Button>
                     }
                 </form>
+                {/* Pre view de imagenes */}
                 <div id={style.divSecuense}> 
                     <AwesomeSlider animation="cubeAnimation">
                         {

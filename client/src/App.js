@@ -14,7 +14,7 @@ import './App.css'
 function App() {
 
   const dispatch = useDispatch()
-
+  /// dispatchado de informacion
   useEffect(()=> {
     dispatch(getTaskCompleted())
     dispatch(getTaskPending())
@@ -33,7 +33,7 @@ function App() {
     <BrowserRouter>
       <div className='App'>
         <Nav />
-        
+        {/* Rutas */}
         <Route exact path='/' component={Home}/>
         <Route path='/addCard' component={Create} />
         <Route path= '/register' component={Register} />

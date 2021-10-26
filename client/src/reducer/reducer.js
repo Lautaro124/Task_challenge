@@ -8,7 +8,8 @@ import {
     POST_USER, 
     LOG_OUT,
     LOGIN_AUTO,
-    TASK_EDIT
+    TASK_EDIT,
+    TASK_CHECK
 } from'../action/constrain'
 
 const initialState = {
@@ -46,39 +47,22 @@ export default function reducer(state = initialState, action) {
         case POST_TASK:
             return {
                 ...state,
-                Task_pending: [...state.Task_pending, action.payload]
+                Task_pending: action.payload.tasks_incomplete,
+                Task_complete: action.payload.tasks_complete
             }
             
-        case PUT_TASK:
+        case TASK_CHECK: 
+            return{
+                ...state,
+                Task_pending: action.payload.tasks_incomplete,
+                Task_complete: action.payload.tasks_complete
+            }
 
-            if(action.payload.status === true){
-
-                return {
-                    ...state,
-                    Task_complete: state.Task_complete.map(e => {
-    
-                        if(e.name === action.payload.name) {
-    
-                            return {...action.payload}
-                        }else {
-                            return e
-                        }
-                    })
-                }
-            }else{
-
-                return {
-                    ...state,
-                    Task_pending: state.Task_pending.map(e => {
-    
-                        if(e.name === action.payload.name) {
-    
-                            return {...action.payload}
-                        }else {
-                            return e
-                        }
-                    })
-                }
+        case PUT_TASK: 
+            return{
+                ...state,
+                Task_pending: action.payload.tasks_incomplete,
+                Task_complete: action.payload.tasks_complete
             }
         
         case GET_USER: 

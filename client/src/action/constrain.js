@@ -10,5 +10,6 @@ module.exports = {
     POST_USER: 'POST_USER',
     LOG_OUT: 'LOG_OUT',
     LOGIN_AUTO: 'LOGIN_AUTO',
-    TASK_EDIT: 'TASK_EDIT'
+    TASK_EDIT: 'TASK_EDIT',
+    TASK_CHECK: 'TASK_CHECK'
 }
